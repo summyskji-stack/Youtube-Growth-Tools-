@@ -20,17 +20,13 @@ font-family:Poppins;
 
 body{
 background:linear-gradient(135deg,#ff0000,#ff7b00);
-color:white;
 min-height:100vh;
+color:white;
 }
 
 header{
 text-align:center;
 padding:30px;
-}
-
-header h1{
-font-size:38px;
 }
 
 .container{
@@ -40,32 +36,22 @@ padding:20px;
 }
 
 .tool{
-
 background:white;
 color:black;
 padding:20px;
 border-radius:10px;
 margin-bottom:20px;
-box-shadow:0 6px 15px rgba(0,0,0,0.2);
-
-}
-
-.tool h2{
-margin-bottom:10px;
 }
 
 input{
-
 width:100%;
-padding:12px;
+padding:10px;
+margin-top:10px;
 border-radius:6px;
 border:1px solid #ccc;
-margin-top:8px;
-
 }
 
 button{
-
 margin-top:10px;
 padding:10px 15px;
 border:none;
@@ -73,34 +59,19 @@ background:#ff0000;
 color:white;
 border-radius:6px;
 cursor:pointer;
-
-}
-
-button:hover{
-background:#d60000;
 }
 
 .result{
-
 margin-top:10px;
 background:#f1f1f1;
 padding:10px;
 border-radius:6px;
-
+color:black;
 }
 
 .copyBtn{
-
 background:#333;
 margin-left:5px;
-
-}
-
-.thumbnail img{
-
-margin-top:10px;
-border-radius:6px;
-
 }
 
 </style>
@@ -111,6 +82,169 @@ border-radius:6px;
 
 <header>
 
+<h1>🚀 YouTube Growth Tools</h1>
+<p>Free Tools For YouTube Creators</p>
+
+</header>
+
+<div class="container">
+
+<!-- TITLE -->
+
+<div class="tool">
+
+<h2>YouTube Title Generator</h2>
+
+<input id="titleInput" placeholder="Enter keyword">
+
+<button onclick="titleGen()">Generate Title</button>
+
+<div class="result" id="titleResult"></div>
+
+</div>
+
+
+<!-- TAGS -->
+
+<div class="tool">
+
+<h2>YouTube Tags Generator</h2>
+
+<input id="tagInput" placeholder="Enter keyword">
+
+<button onclick="tagGen()">Generate Tags</button>
+
+<div class="result" id="tagResult"></div>
+
+</div>
+
+
+<!-- DESCRIPTION -->
+
+<div class="tool">
+
+<h2>YouTube Description Generator</h2>
+
+<input id="descInput" placeholder="Enter topic">
+
+<button onclick="descGen()">Generate Description</button>
+
+<div class="result" id="descResult"></div>
+
+</div>
+
+
+<!-- HASHTAGS -->
+
+<div class="tool">
+
+<h2>YouTube Hashtag Generator</h2>
+
+<input id="hashInput" placeholder="Enter keyword">
+
+<button onclick="hashGen()">Generate Hashtags</button>
+
+<div class="result" id="hashResult"></div>
+
+</div>
+
+
+<!-- THUMBNAIL -->
+
+<div class="tool">
+
+<h2>YouTube Thumbnail Downloader</h2>
+
+<input id="urlInput" placeholder="Paste YouTube video link">
+
+<button onclick="thumbGen()">Get Thumbnail</button>
+
+<div class="result" id="thumbResult"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function copyText(text){
+
+navigator.clipboard.writeText(text)
+
+alert("Copied")
+
+}
+
+
+/* TITLE */
+
+function titleGen(){
+
+let k=document.getElementById("titleInput").value
+
+if(!k)return
+
+let titles=[
+
+"How To "+k+" (Full Tutorial)",
+k+" Complete Guide",
+"Top 10 "+k+" Tips",
+k+" Step By Step Tutorial",
+"Secrets Of "+k
+
+]
+
+let html=""
+
+titles.forEach(t=>{
+
+html+=t+" <button class='copyBtn' onclick=\"copyText('"+t+"')\">Copy</button><br><br>"
+
+})
+
+document.getElementById("titleResult").innerHTML=html
+
+}
+
+
+/* TAGS */
+
+function tagGen(){
+
+let k=document.getElementById("tagInput").value
+
+if(!k)return
+
+let tags=[
+
+k,
+k+" tutorial",
+k+" tips",
+"how to "+k,
+k+" youtube",
+k+" guide"
+
+]
+
+let text=tags.join(", ")
+
+document.getElementById("tagResult").innerHTML=text+
+
+" <button class='copyBtn' onclick=\"copyText('"+text+"')\">Copy</button>"
+
+}
+
+
+/* DESCRIPTION */
+
+function descGen(){
+
+let k=document.getElementById("descInput").value
+
+if(!k)return
+
+let text="In this video we explain "+k+"
 <h1>🚀 YouTube Growth Tools</h1>
 <p>Free Tools For YouTube Creators</p>
 
