@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>YouTube Growth Tools</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
@@ -18,11 +20,9 @@ font-family:Poppins;
 
 body{
 background:linear-gradient(135deg,#ff0000,#ff7b00);
-min-height:100vh;
 color:white;
+min-height:100vh;
 }
-
-/* header */
 
 header{
 text-align:center;
@@ -34,20 +34,20 @@ font-size:38px;
 }
 
 .container{
-padding:20px;
-max-width:1000px;
+max-width:900px;
 margin:auto;
+padding:20px;
 }
 
-/* tool card */
-
 .tool{
+
 background:white;
 color:black;
 padding:20px;
 border-radius:10px;
 margin-bottom:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.3);
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
+
 }
 
 .tool h2{
@@ -55,14 +55,17 @@ margin-bottom:10px;
 }
 
 input{
+
 width:100%;
-padding:10px;
-margin-top:10px;
+padding:12px;
 border-radius:6px;
 border:1px solid #ccc;
+margin-top:8px;
+
 }
 
 button{
+
 margin-top:10px;
 padding:10px 15px;
 border:none;
@@ -70,13 +73,34 @@ background:#ff0000;
 color:white;
 border-radius:6px;
 cursor:pointer;
+
+}
+
+button:hover{
+background:#d60000;
 }
 
 .result{
+
 margin-top:10px;
 background:#f1f1f1;
 padding:10px;
 border-radius:6px;
+
+}
+
+.copyBtn{
+
+background:#333;
+margin-left:5px;
+
+}
+
+.thumbnail img{
+
+margin-top:10px;
+border-radius:6px;
+
 }
 
 </style>
@@ -95,7 +119,7 @@ border-radius:6px;
 
 <div class="container">
 
-<!-- Title Generator -->
+<!-- TITLE GENERATOR -->
 
 <div class="tool">
 
@@ -110,7 +134,225 @@ border-radius:6px;
 </div>
 
 
-<!-- Tags Generator -->
+<!-- TAG GENERATOR -->
+
+<div class="tool">
+
+<h2>YouTube Tags Generator</h2>
+
+<input id="tagKeyword" placeholder="Enter keyword">
+
+<button onclick="generateTags()">Generate Tags</button>
+
+<div class="result" id="tagResult"></div>
+
+</div>
+
+
+<!-- DESCRIPTION -->
+
+<div class="tool">
+
+<h2>YouTube Description Generator</h2>
+
+<input id="descKeyword" placeholder="Enter video topic">
+
+<button onclick="generateDesc()">Generate Description</button>
+
+<div class="result" id="descResult"></div>
+
+</div>
+
+
+<!-- HASHTAGS -->
+
+<div class="tool">
+
+<h2>YouTube Hashtag Generator</h2>
+
+<input id="hashKeyword" placeholder="Enter keyword">
+
+<button onclick="generateHash()">Generate Hashtags</button>
+
+<div class="result" id="hashResult"></div>
+
+</div>
+
+
+<!-- THUMBNAIL DOWNLOADER -->
+
+<div class="tool">
+
+<h2>YouTube Thumbnail Downloader</h2>
+
+<input id="thumbUrl" placeholder="Paste YouTube video link">
+
+<button onclick="getThumbnail()">Get Thumbnail</button>
+
+<div class="result thumbnail" id="thumbResult"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* copy helper */
+
+function copyText(text){
+
+navigator.clipboard.writeText(text)
+
+alert("Copied!")
+
+}
+
+
+/* TITLE GENERATOR */
+
+function generateTitle(){
+
+let k=document.getElementById("titleKeyword").value
+
+let titles=[
+
+"How To "+k+" (Full Tutorial)",
+k+" Complete Guide For Beginners",
+"Top 10 "+k+" Tips You Must Know",
+k+" Step By Step Tutorial",
+k+" Secrets Nobody Tells You",
+"Best Way To Learn "+k,
+k+" Full Course For Beginners"
+
+]
+
+let html=""
+
+titles.forEach(t=>{
+
+html+=t+" <button class='copyBtn' onclick='copyText(`"+t+"`)'>Copy</button><br><br>"
+
+})
+
+document.getElementById("titleResult").innerHTML=html
+
+}
+
+
+/* TAG GENERATOR */
+
+function generateTags(){
+
+let k=document.getElementById("tagKeyword").value
+
+let tags=[
+
+k,
+k+" tutorial",
+k+" tips",
+"how to "+k,
+k+" youtube",
+k+" guide",
+k+" tricks"
+
+]
+
+let tagText=tags.join(", ")
+
+document.getElementById("tagResult").innerHTML=
+
+tagText+" <button class='copyBtn' onclick='copyText(`"+tagText+"`)'>Copy</button>"
+
+}
+
+
+/* DESCRIPTION */
+
+function generateDesc(){
+
+let k=document.getElementById("descKeyword").value
+
+let desc="In this video we talk about "+k+". This tutorial will help beginners understand "+k+" step by step. Make sure to like, share and subscribe for more amazing content."
+
+document.getElementById("descResult").innerHTML=
+
+desc+" <button class='copyBtn' onclick='copyText(`"+desc+"`)'>Copy</button>"
+
+}
+
+
+/* HASHTAGS */
+
+function generateHash(){
+
+let k=document.getElementById("hashKeyword").value
+
+let hash=[
+
+"#"+k,
+"#"+k+"tips",
+"#"+k+"tutorial",
+"#youtube",
+"#creator",
+"#contentcreator"
+
+]
+
+let hashText=hash.join(" ")
+
+document.getElementById("hashResult").innerHTML=
+
+hashText+" <button class='copyBtn' onclick='copyText(`"+hashText+"`)'>Copy</button>"
+
+}
+
+
+/* THUMBNAIL DOWNLOADER */
+
+function getVideoID(url){
+
+let regExp=/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
+
+let match=url.match(regExp)
+
+return (match && match[2].length==11)? match[2] : null
+
+}
+
+
+function getThumbnail(){
+
+let url=document.getElementById("thumbUrl").value
+
+let id=getVideoID(url)
+
+if(!id){
+
+document.getElementById("thumbResult").innerHTML="Invalid YouTube URL"
+
+return
+
+}
+
+let max="https://img.youtube.com/vi/"+id+"/maxresdefault.jpg"
+
+let hq="https://img.youtube.com/vi/"+id+"/hqdefault.jpg"
+
+document.getElementById("thumbResult").innerHTML=
+
+"<img src='"+max+"' width='320'><br><br>"+
+
+"<a href='"+max+"' target='_blank'>Download HD Thumbnail</a><br><br>"+
+
+"<a href='"+hq+"' target='_blank'>Download Normal Thumbnail</a>"
+
+}
+
+</script>
+
+</body>
+</html><!-- Tags Generator -->
 
 <div class="tool">
 
